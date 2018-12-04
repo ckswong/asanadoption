@@ -139,5 +139,4 @@ window.onload = () => {
   for (let tile of tiles) {
     tilesContainer.appendChild(tile);
   }
-  console.log(tilesContainer);
 }
