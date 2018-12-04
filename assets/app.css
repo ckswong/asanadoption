@@ -1,9 +1,13 @@
 /* Globals */
 :root {
-  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* using system defaults for faster performance */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   --font-serif: Georgia, serif;
   --color-secondary: #333;
   --color-link: #635ac7;
+  --color-primary: #484A6F;
+  --color-grey: #CFD2D8;
+  --color-black: #323232;
 
   font-family: var(--font-sans);
   font-weight: normal;
@@ -12,6 +16,7 @@
 
 body {
   margin: 0;
+  color: var(--color-primary);
 }
 
 a {
@@ -24,23 +29,37 @@ a {
   padding-top: 2rem;
   text-align: center;
 }
+.global-header__title {
+  font-size: 2.4rem;
+}
 
 /* Header Quote */
 .header-quote {
   color: var(--color);
   font-family: var(--font-serif);
+  font-style: italic;
   margin-left: auto;
   margin-right: auto;
   max-width: 460px;
 }
-
-/* Global Footer */
-.global-footer {
-  color: var(--color);
-  font-family: var(--font-serif);
-  text-align: center;
+.header-quote__quoted-text::before,
+.header-quote__quoted-text::after {
+  display: inline;
+  color: var(--color-grey-primary);
+  font-size: 1.2rem;
 }
 
+.header-quote__quoted-text::before {
+  content: open-quote;
+}
+.header-quote__quoted-text::after {
+  content: close-quote;
+}
+.header-quote__citation {
+  font-weight: 600;
+}
+
+/* Image Gallery */
 main {
   padding: 20px;
 }
@@ -51,13 +70,16 @@ main {
   grid-template-rows: auto;
   grid-gap: 20px;
   width: 100%;
+  max-width: 1440px;
+  margin: auto;
 }
 
 .tile {
   position: relative;
   padding-top: 100%;
   cursor: zoom-in;
-  background-color: black;
+  background-color: var(--color-primary);
+  margin: 0;
 }
 .tile__img {
   position: absolute;
@@ -73,6 +95,7 @@ main {
   opacity: 1;
 }
 
+/* Modal Elements */
 .dimmer {
   display: none;
   position: fixed;
@@ -80,7 +103,7 @@ main {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: var(--color-black);
   opacity: 0.9;
 }
 
@@ -137,4 +160,12 @@ main {
     max-width: 70vw;
     max-height: 70vw;
   }
+}
+
+/* Global Footer */
+.global-footer {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  text-align: center;
+  font-style: italic;
 }

@@ -112,8 +112,8 @@ window.onload = () => {
   const closeBtn = document.querySelector('.js-modal-close');
   const tilesContainer = document.querySelector('.js-tiles-container');
 
-  const clickHandler = (src) => {
-    const modalImg = buildImg(src, 'modal__img');
+  const clickHandler = (src, titleSrc) => {
+    const modalImg = buildImg(src, 'modal__img', titleSrc, 'modal');
     imgContainer.appendChild(modalImg);
     dimmer.classList.add('active');
     modal.classList.add('active');
@@ -129,27 +129,30 @@ window.onload = () => {
   closeBtn.addEventListener("click", closeHandler);
   dimmer.addEventListener("click", closeHandler);
 
-  const buildImg = (src, className) => {
+  const buildImg = (src, className, titleSrc, type, index='') => {
     const img = document.createElement('img');
     img.classList.add(className);
     img.src = src;
+    img.alt = `puppy ${type} image ${index}`;
+    img.title = `photo credit: ${titleSrc}`;
     return img;
   };
 
   const buildTile = (tileImg, onCLickHandler) => {
-    const tile = document.createElement('div');
+    const tile = document.createElement('figure');
     tile.classList.add('tile');
     tile.onclick = onCLickHandler;
     tile.appendChild(tileImg);
     return tile;
   }
 
-  const tiles = dogs.map(dog => {
+  const tiles = dogs.map((dog, index) => {
     const thumbsSrc = `.${dog.thumb}`;
     const fullSizeSrc = `.${dog.image}`;
+    const titleSrc = dog.source;
     const className = 'tile__img';
-    const tileImg = buildImg(thumbsSrc, className);
-    const tile = buildTile(tileImg, () => clickHandler(fullSizeSrc));
+    const tileImg = buildImg(thumbsSrc, className, titleSrc, 'thumbnail', index);
+    const tile = buildTile(tileImg, () => clickHandler(fullSizeSrc, titleSrc));
     return tile;
   });
 
