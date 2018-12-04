@@ -1,4 +1,15 @@
 window.onload = () => {
+  const dataPath = './assets/data/dogs.json';
+  // let dogsData = {};
+  // fetch(dataPath)
+  // .then(function(response) {
+  //   return response.json();
+  // })
+  // .then(function(json) {
+  //   // console.log(JSON.stringify(json));
+  //   dogsData = json;
+  // });
+
   const dogsData = {
     "dogs": [
     {
@@ -79,21 +90,52 @@ window.onload = () => {
   }
   const {dogs} = dogsData;
 
-  const tiles = dogs.map(dog => {
+  const dimmer = document.querySelector('.js-dimmer');
+  const modal = document.querySelector('.js-modal');
+  const imgContainer = document.querySelector('.js-img-container');
+  const closeBtn = document.querySelector('.js-modal-close');
+  const tilesContainer = document.querySelector('.js-tiles-container');
 
+  const clickHandler = (src) => {
+    const modalImg = buildImg(src, 'modal__img');
+    imgContainer.appendChild(modalImg);
+    dimmer.classList.add('active');
+    modal.classList.add('active');
+  };
+
+  const closeHandler = () => {
+    const modalImg = document.querySelector('.modal__img');
+    dimmer.classList.remove('active');
+    modal.classList.remove('active');
+    imgContainer.removeChild(modalImg);
+  }
+
+  closeBtn.addEventListener("click", closeHandler);
+  dimmer.addEventListener("click", closeHandler);
+
+  const buildImg = (src, className) => {
+    const img = document.createElement('img');
+    img.classList.add(className);
+    img.src = src;
+    return img;
+  };
+
+  const buildTile = (tileImg, onCLickHandler) => {
     const tile = document.createElement('div');
     tile.classList.add('tile');
-
-    const tileImg = document.createElement('img');
-    tileImg.classList.add('tile__img');
-    tileImg.src = `.${dog.image}`;
-
+    tile.onclick = onCLickHandler;
     tile.appendChild(tileImg);
+    return tile;
+  }
+
+  const tiles = dogs.map(dog => {
+    const src = `.${dog.image}`;
+    const className = 'tile__img';
+    const tileImg = buildImg(src, className);
+    const tile = buildTile(tileImg, () => clickHandler(src));
     return tile;
   });
 
-
-  const tilesContainer = document.querySelector('.js-tiles-container');
   for (let tile of tiles) {
     tilesContainer.appendChild(tile);
   }
