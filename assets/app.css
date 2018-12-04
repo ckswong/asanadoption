@@ -74,6 +74,21 @@ main {
   margin: auto;
 }
 
+.loading-spinner {
+  margin: auto;
+  font-size: 4rem;
+  padding: 300px;
+  grid-column: 1 / span 5;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: spin;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @media only screen and (max-width: 896px) {
   .tiles-container { grid-template-columns: repeat(3, 1fr); }
 }
