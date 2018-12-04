@@ -95,6 +95,28 @@ main {
   opacity: 1;
 }
 
+/* Fallback styles for browsers that don't support grid */
+@supports not (display: grid) {
+  .tiles-container:before,
+  .tiles-container:after {
+    overflow: hidden;
+  }
+  .tile {
+    width: 20%;
+    float: left;
+    padding: 20% 0 0;
+    background-color: initial;
+  }
+  .tile:last-of-type {
+    clear: after;
+  }
+  .tile__img {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    margin: 10px;
+  }
+}
+
 /* Modal Elements */
 .dimmer {
   display: none;
