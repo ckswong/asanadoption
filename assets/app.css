@@ -74,6 +74,13 @@ main {
   margin: auto;
 }
 
+@media only screen and (max-width: 896px) {
+  .tiles-container { grid-template-columns: repeat(3, 1fr); }
+}
+@media only screen and (max-width: 480px) {
+  .tiles-container { grid-template-columns: repeat(2, 1fr); }
+}
+
 .tile {
   position: relative;
   padding-top: 100%;
@@ -97,8 +104,7 @@ main {
 
 /* Fallback styles for browsers that don't support grid */
 @supports not (display: grid) {
-  .tiles-container:before,
-  .tiles-container:after {
+  .tiles-container{
     overflow: hidden;
   }
   .tile {
@@ -114,6 +120,18 @@ main {
     width: calc(100% - 10px);
     height: calc(100% - 10px);
     margin: 10px;
+  }
+  @media only screen and (max-width: 896px) {
+    .tile {
+      width: 33.33%;
+      padding: 33.33% 0 0;
+    }
+  }
+  @media only screen and (max-width: 480px) {
+    .tile {
+      width: 50%;
+      padding: 50% 0 0;
+    }
   }
 }
 
